@@ -31,7 +31,7 @@ const LearningHub = () => {
         Object.entries(category.topics).forEach(([topicKey, topic]) => {
           topics.push({
             ...topic,
-            id: topicKey,
+            id: `${categoryKey}-${topicKey}`,
             category: categoryKey,
             categoryName: category.title,
             categoryIcon: category.icon,
@@ -46,10 +46,10 @@ const LearningHub = () => {
   const filterTopics = (topics) => {
     return topics.filter(topic => {
       const matchesSearch = topic.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                           topic.description.toLowerCase().includes(searchTerm.toLowerCase());
+        topic.description.toLowerCase().includes(searchTerm.toLowerCase());
       const matchesCategory = selectedCategory === 'all' || topic.category === selectedCategory;
       const matchesDifficulty = difficulty === 'all'; // Add difficulty filtering logic
-      
+
       return matchesSearch && matchesCategory && matchesDifficulty;
     });
   };
@@ -59,9 +59,9 @@ const LearningHub = () => {
 
   if (selectedTopic) {
     return (
-      <TopicDetail 
-        topic={selectedTopic} 
-        onBack={() => setSelectedTopic(null)} 
+      <TopicDetail
+        topic={selectedTopic}
+        onBack={() => setSelectedTopic(null)}
       />
     );
   }
@@ -150,11 +150,10 @@ const LearningHub = () => {
               <motion.button
                 key={category.id}
                 onClick={() => setSelectedCategory(category.id)}
-                className={`p-4 rounded-lg border transition-all duration-200 ${
-                  selectedCategory === category.id
+                className={`p-4 rounded-lg border transition-all duration-200 ${selectedCategory === category.id
                     ? 'bg-blue-500 text-white border-blue-500'
                     : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-700 hover:border-blue-300 dark:hover:border-blue-600'
-                }`}
+                  }`}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 initial={{ opacity: 0, y: 20 }}

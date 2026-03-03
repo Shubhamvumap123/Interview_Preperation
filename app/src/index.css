@@ -50,7 +50,27 @@
 }
 
 body {
+  margin: 0;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   background-color: hsl(var(--background));
   color: hsl(var(--foreground));
-  font-feature-settings: "rlig" 1, "calt" 1;
+}
+
+.scroller-none::-webkit-scrollbar {
+  display: none;
+}
+.scroller-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@keyframes shadow-glow {
+  0%, 100% { box-shadow: 0 0 5px rgba(59, 130, 246, 0.5); }
+  50% { box-shadow: 0 0 15px rgba(59, 130, 246, 0.8); }
+}
+
+.shadow-glow {
+  animation: shadow-glow 2s infinite;
 }
